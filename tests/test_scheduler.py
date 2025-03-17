@@ -8,64 +8,28 @@ from .utils import get_dummy_optimizer
 
 
 # Tests >>>
-def test_warmup_phase_linear():
-    # Test warmup type: linear
-    assert scheduler.OneCycleLr._warmup_phase(  # last step retuning max lr
+@pytest.mark.parametrize(
+    "warmup_type,step,expected_lr",
+    [
+        # Linear warmup tests
+        ("linear", 0, 0.001),      # first step returning min lr
+        ("linear", 5, 0.0055),     # 0.5 of the duration returns the mean of start and max lr
+        ("linear", 10, 0.01),      # last step returning max lr
+        
+        # Exponential warmup tests
+        ("exp", 0, 0.001),         # first step returning min lr
+        ("exp", 5, 0.00316227),    # 0.5 of the duration
+        ("exp", 10, 0.01),         # last step returning max lr
+    ]
+)
+def test_warmup_phase(warmup_type, step, expected_lr):
+    lr = scheduler.OneCycleLr._warmup_phase(
         None,
-        step=10,
+        step=step,
         warmup_duration=10,
         warmup_start_lr=0.001,
         warmup_max_lr=0.01,
-        warmup_type="linear",
-    ) == pytest.approx(0.01, abs=1e-8)
-
-    assert scheduler.OneCycleLr._warmup_phase(  # first step retuning min lr
-        None,
-        step=0,
-        warmup_duration=10,
-        warmup_start_lr=0.001,
-        warmup_max_lr=0.01,
-        warmup_type="linear",
-    ) == pytest.approx(0.001, abs=1e-8)
-
-    assert (
-        scheduler.OneCycleLr._warmup_phase(  # 0.5 of the duration returns the mean of start and max lr
-            None,
-            step=5,
-            warmup_duration=10,
-            warmup_start_lr=0.001,
-            warmup_max_lr=0.01,
-            warmup_type="linear",
-        )
-        == pytest.approx(0.0055, abs=1e-8)
+        warmup_type=warmup_type,
     )
-
-
-def test_warmup_phase_exp():
-    # Test warmup type: exp
-    assert scheduler.OneCycleLr._warmup_phase(  # last step retuning max lr
-        None,
-        step=10,
-        warmup_duration=10,
-        warmup_start_lr=0.001,
-        warmup_max_lr=0.01,
-        warmup_type="exp",
-    ) == pytest.approx(0.01, abs=1e-8)
-
-    assert scheduler.OneCycleLr._warmup_phase(  # first step retuning min lr
-        None,
-        step=0,
-        warmup_duration=10,
-        warmup_start_lr=0.001,
-        warmup_max_lr=0.01,
-        warmup_type="exp",
-    ) == pytest.approx(0.001, abs=1e-8)
-
-    assert scheduler.OneCycleLr._warmup_phase( # 0.5 of the duration returns the mean of start and max lr
-        None,
-        step=5,
-        warmup_duration=10,
-        warmup_start_lr=0.001,
-        warmup_max_lr=0.01,
-        warmup_type="exp",
-    ) == pytest.approx(0.00316227, abs=1e-8)
+    assert lr == pytest.approx(expected_lr, abs=1e-8)
+    

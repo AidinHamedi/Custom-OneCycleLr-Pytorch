@@ -1,0 +1,24 @@
+[project]
+name = "custom-onecyclelr"
+version = "0.1.0"
+description = "A Custom PyTorch implementation of the OneCycleLR learning rate scheduler. (With some modifications)"
+authors = [
+    {name = "AidinHamedi",email = "aidin.hamediasl@gmail.com"}
+]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+]
+
+[tool.poetry]
+packages = [{include = "custom_onecyclelr", from = "src"}]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+isort = "^6.0.1"
+ruff = "^0.11.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -5,14 +5,23 @@ description = "A Custom PyTorch implementation of the OneCycleLR learning rate s
 authors = [
     {name = "AidinHamedi",email = "aidin.hamediasl@gmail.com"}
 ]
-license = "MIT"
+license = { file = "LICENSE" }
 readme = "README.md"
+repository = "https://github.com/python-poetry/poetry"
 requires-python = ">=3.10"
+keywords = [
+    "pytorch", "deep-learning", "optimizer", "lr scheduler", "OneCycleLR"
+]
+dynamic = [ "classifiers" ]
 dependencies = [
 ]
 
 [tool.poetry]
 packages = [{include = "custom_onecyclelr", from = "src"}]
+classifiers = [
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"

@@ -2,25 +2,34 @@
 name = "custom-onecyclelr"
 version = "0.1.0"
 description = "A Custom PyTorch implementation of the OneCycleLR learning rate scheduler. (With some modifications)"
-authors = [
-    {name = "AidinHamedi",email = "aidin.hamediasl@gmail.com"}
-]
 license = { file = "LICENSE" }
 readme = "README.md"
-repository = "https://github.com/python-poetry/poetry"
+authors = [{ name = "AidinHamedi", email = "aidin.hamediasl@gmail.com" }]
 requires-python = ">=3.10"
 keywords = [
-    "pytorch", "deep-learning", "optimizer", "lr scheduler", "OneCycleLR"
+    "pytorch",
+    "deep-learning",
+    "optimizer",
+    "lr scheduler",
+    "OneCycleLR",
 ]
-dynamic = [ "classifiers" ]
-dependencies = [
-]
+dynamic = ["classifiers"]
+
+[tool.poetry.dependencies]
+torch = { version = ">=2.0", source = "torch" }
+
+[[tool.poetry.source]]
+name = "torch"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
+
+[project.urls]
+homepage = "https://github.com/AidinHamedi/Custom-OneCycleLr-Pytorch"
+repository = "https://github.com/AidinHamedi/Custom-OneCycleLr-Pytorch"
 
 [tool.poetry]
-packages = [{include = "custom_onecyclelr", from = "src"}]
-classifiers = [
-    "Topic :: Software Development :: Libraries :: Python Modules"
-]
+packages = [{ include = "custom_onecyclelr", from = "src" }]
+classifiers = ["Topic :: Software Development :: Libraries :: Python Modules"]
 
 
 [tool.poetry.group.dev.dependencies]

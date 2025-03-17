@@ -13,9 +13,9 @@ class OneCycleLr(LRScheduler):
         optimizer: Optimizer,
         warmup_iters: int,
         lr_idling_iters: int,
-        sec_phase_iters: int,
+        annealing_iters: int,
         decay_iters: int,
-        sec_phase_lr_min: float,
+        annealing_lr_min: float,
         decay_lr_min: float,
         warmup_start_lr: float = 0.001,
         warmup_type: Literal["linear", "exp"] = "exp",
@@ -33,4 +33,28 @@ class OneCycleLr(LRScheduler):
         warmup_max_lr: float,
         warmup_type: Literal["linear", "exp"] = "exp",
     ) -> float:
+        # Calculate the lr based on the warmup type
+        match warmup_type:
+            case "linear":
+                lr = warmup_start_lr + (
+                    (warmup_max_lr - warmup_start_lr) * (step / warmup_duration)
+                )
+
+            case "exp":
+                lr = warmup_start_lr * math.pow(
+                    math.pow(warmup_max_lr / warmup_start_lr, 1 / warmup_duration), step
+                )
+
+        return lr
+    
+    def _annealing__phase(
+        self,
+        step: int,
+        annealing_duration: int,
+        annealing_start_lr: float,
+        annealing_min_lr: float,
+    ) -> float:
         pass
+
+    def get_lr(self):
+        return 0.01

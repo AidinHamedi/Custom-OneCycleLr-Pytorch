@@ -34,13 +34,13 @@ optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
 scheduler_instance = scheduler.OneCycleLr(
     optimizer,
     warmup_iters=6,  # Number of iterations for the warmup phase
-    lr_ idling_ iters=8,  # Number of iterations where learning rate remains at max
-    annealing_ iters=56,  # Cosine annealing phase duration
-    decay_ iters=100,  # Linear decay phase duration
+    lr_idling_iters=8,  # Number of iterations where learning rate remains at max
+    annealing_iters=56,  # Cosine annealing phase duration
+    decay_iters=100,  # Linear decay phase duration
     max_lr=0.01,
     annealing_lr_min=0.001,
     decay_lr_min=0.0001,
-    warmup_start_ lr=0.0001,
+    warmup_start_lr=0.0001,
     warmup_type="exp"  # "linear" or "exp"
 )
 
@@ -58,6 +58,8 @@ for epoch in range(total_epochs):
 ```
 
 ## Visualization
+
+![Visualization-img](doc/vis/onecycle_lr_schedule.png)
 
 You can visualize how the learning rate changes over iterations by running:
 

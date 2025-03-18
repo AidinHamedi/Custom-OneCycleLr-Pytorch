@@ -77,7 +77,7 @@ def test_decay_phase(step, expected_lr):
     assert lr == pytest.approx(expected_lr, abs=1e-8)
 
 
-def test_scheduler_init():
+def test_scheduler_init(): # TODO: Improve the test
     # Get a dummy optimizer 
     optimizer = get_dummy_optimizer()
     

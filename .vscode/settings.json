@@ -5,6 +5,7 @@
         "fontsize",
         "isort",
         "linestyle",
+        "matplotlib",
         "onecycle",
         "onecyclelr",
         "plotille",

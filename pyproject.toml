@@ -13,7 +13,6 @@ keywords = [
     "lr scheduler",
     "OneCycleLR",
 ]
-dynamic = ["classifiers"]
 
 [tool.poetry.dependencies]
 torch = { version = ">=2.0", source = "torch" }
@@ -29,7 +28,6 @@ repository = "https://github.com/AidinHamedi/Custom-OneCycleLr-Pytorch"
 
 [tool.poetry]
 packages = [{ include = "custom_onecyclelr", from = "src" }]
-classifiers = ["Topic :: Software Development :: Libraries :: Python Modules"]
 
 
 [tool.poetry.group.dev.dependencies]

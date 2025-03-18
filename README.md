@@ -14,20 +14,9 @@ A custom implementation of the OneCycle learning rate scheduler for PyTorch.
 
 ## Installation
 
-### Using Poetry
-1. Install [Poetry](https://python-poetry.org/) if you haven't already.
-2. Clone the repository:
 ```bash
-git clone https://github.com/AidinHamedi/Custom-OneCycleLr-Pytorch.git
-cd Custom-OneCycleLr-Pytorch
+pip install custom-onecyclelr
 ```
-3. Install dependencies:
-```bash
-poetry install --extras dev,doc
-```
-
-### Manual Installation (Optional)
-If you prefer not to use Poetry, you can manually install the package using pip after cloning the repository.
 
 ## Usage
 

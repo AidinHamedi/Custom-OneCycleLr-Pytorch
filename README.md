@@ -1,6 +1,10 @@
 
 # OneCycle Learning Rate Scheduler (Custom Implementation)
 
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PyPI - Version](https://img.shields.io/pypi/v/custom-onecyclelr)](https://pypi.org/project/custom-onecyclelr/)
+
 A custom implementation of the OneCycle learning rate scheduler for PyTorch.
 
 ## Features

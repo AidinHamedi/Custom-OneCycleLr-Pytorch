@@ -59,7 +59,7 @@ for epoch in range(total_epochs):
 
 ## Visualization
 
-![Visualization-img](doc/vis/onecycle_lr_schedule.png)
+![Visualization-img](https://github.com/AidinHamedi/Custom-OneCycleLr-Pytorch/blob/master/doc/vis/onecycle_lr_schedule.png?raw=true)
 
 You can visualize how the learning rate changes over iterations by running:
 

@@ -8,6 +8,28 @@ from torch.optim.lr_scheduler import LRScheduler, _warn_get_lr_called_within_ste
 
 # Core >>>
 class OneCycleLr(LRScheduler):
+    """
+    A custom version of the onecycle learning rate scheduler with four phases: warmup, idling, annealing, and decay.
+
+    Args:
+        optimizer (Optimizer): The optimizer for which the learning rate needs to be scheduled.
+        warmup_iters (int): The number of iterations for the warmup phase. Must be a non-negative integer.
+        lr_idling_iters (int): The number of iterations for the learning rate idling phase. Must be a non-negative integer.
+        annealing_iters (int): The number of iterations for the cosine annealing phase. Must be a non-negative integer.
+        decay_iters (int): The number of iterations for the linear decay phase. Must be a non-negative integer.
+        max_lr (float): The maximum learning rate during the schedule. Must be non-negative.
+        annealing_lr_min (float): The minimum learning rate during the annealing phase. Must be non-negative.
+        decay_lr_min (float): The minimum learning rate after the decay phase. Must be non-negative.
+        warmup_start_lr (float, optional): The starting learning rate during the warmup phase. Defaults to 0.001.
+        warmup_type (Literal["linear", "exp"], optional): The type of warmup to perform. Defaults to "exp".
+        last_epoch (int, optional): The index of the last completed epoch, used for resuming training. Defaults to -1.
+        verbose (str, optional): Reserved for future use. Defaults to "deprecated".
+
+    Raises:
+        ValueError: If the number of iterations for any phase (warmup, idling, annealing, decay) is negative.
+        ValueError: If any learning rate parameter is negative (max_lr, annealing_lr_min, decay_lr_min, warmup_start_lr).
+        ValueError: If the `warmup_type` is not one of the allowed values ('linear' or 'exp').
+    """
     def __init__(
         self,
         optimizer: Optimizer,

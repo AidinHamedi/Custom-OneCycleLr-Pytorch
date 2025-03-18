@@ -75,3 +75,7 @@ def test_decay_phase(step, expected_lr):
         decay_min_lr=0.001,
     )
     assert lr == pytest.approx(expected_lr, abs=1e-8)
+
+
+def test_scheduler_init():
+    pass

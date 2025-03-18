@@ -23,9 +23,26 @@ class OneCycleLr(LRScheduler):
         last_epoch: int = -1,
         verbose="deprecated",
     ) -> None:
+        # Validate params
+        if min(warmup_iters, lr_idling_iters, annealing_iters, decay_iters) < 0:
+            raise ValueError(
+                "Invalid input: The number of iterations for any phase (warmup, idling, annealing, or decay) cannot be negative. "
+                "Please ensure all iteration counts are non-negative integers."
+            )
+        if min(max_lr, annealing_lr_min, decay_lr_min, warmup_start_lr) < 0:
+            raise ValueError(
+                "Invalid input: Learning rates (max_lr, annealing_lr_min, decay_lr_min, warmup_start_lr) "
+                "cannot be negative. Please ensure all learning rates are non-negative."
+            )
+        if warmup_type not in ["linear", "exp"]:
+            raise ValueError(
+                f"Invalid warmup type: '{warmup_type}'. Allowed values are 'linear' and 'exp'. "
+                "Please use one of these options for the warmup_type parameter."
+            )
+        
         # Init the super class
         super().__init__(optimizer, last_epoch, verbose)
-
+        
         # Init the attributes
         self.warmup_iters = warmup_iters
         self.lr_idling_iters = lr_idling_iters

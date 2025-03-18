@@ -46,15 +46,33 @@ class OneCycleLr(LRScheduler):
                 )
 
         return lr
-    
-    def _annealing__phase(
+
+    def _annealing_phase(
         self,
         step: int,
         annealing_duration: int,
         annealing_start_lr: float,
         annealing_min_lr: float,
     ) -> float:
-        pass
+        # Interpolate between start_lr and min_lr using a cosine factor
+        return (
+            annealing_min_lr
+            + (annealing_start_lr - annealing_min_lr)
+            * (1 + math.cos(math.pi * (step / annealing_duration)))
+            / 2
+        )
+
+    def _decay_phase(
+        self,
+        step: int,
+        decay_duration: int,
+        decay_start_lr: float,
+        decay_min_lr: float,
+    ) -> float:
+        # Linear decay from start_lr to min_lr
+        return decay_start_lr - (
+            (step / decay_duration) * (decay_start_lr - decay_min_lr)
+        )
 
     def get_lr(self):
         return 0.01

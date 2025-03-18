@@ -1,9 +1,17 @@
 {
     "cSpell.words": [
+        "axvline",
+        "figsize",
+        "fontsize",
         "isort",
+        "linestyle",
+        "onecycle",
         "onecyclelr",
+        "plotille",
         "pytest",
         "randn",
+        "xlabel",
+        "ylabel"
     ],
     "python.testing.pytestArgs": [
         "tests"

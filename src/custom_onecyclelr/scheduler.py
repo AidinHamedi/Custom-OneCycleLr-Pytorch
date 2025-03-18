@@ -90,7 +90,7 @@ class OneCycleLr(LRScheduler):
         """Retrieve the learning rate of each parameter group."""
         _warn_get_lr_called_within_step(self)
 
-        if self.last_epoch == 0 or self.last_epoch > self.total_iters:
+        if self.last_epoch == 0:
             return [group["lr"] for group in self.optimizer.param_groups]
 
         # Calculate the lr based on the current phase
@@ -110,7 +110,7 @@ class OneCycleLr(LRScheduler):
             self.warmup_iters + self.lr_idling_iters + self.annealing_iters
         ):  # Annealing phase
             lr = self._annealing_phase(
-                step=self.last_epoch - (self.warmup_iters - self.lr_idling_iters),
+                step=self.last_epoch - (self.warmup_iters + self.lr_idling_iters),
                 annealing_duration=self.annealing_iters,
                 annealing_start_lr=self.max_lr,
                 annealing_min_lr=self.annealing_lr_min,
@@ -123,9 +123,9 @@ class OneCycleLr(LRScheduler):
         ):  # Decay phase
             lr = self._decay_phase(
                 step=self.last_epoch
-                - (self.warmup_iters - self.lr_idling_iters - self.annealing_iters),
+                - (self.warmup_iters + self.lr_idling_iters + self.annealing_iters),
                 decay_duration=self.decay_iters,
-                decay_start_lr=self.max_lr,
+                decay_start_lr=self.annealing_lr_min,
                 decay_min_lr=self.decay_lr_min,
             )
         else:  # Min lr

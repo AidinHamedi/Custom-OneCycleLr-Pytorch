@@ -5,7 +5,7 @@ description = "A Custom PyTorch implementation of the OneCycleLR learning rate s
 license = { file = "LICENSE" }
 readme = "README.md"
 authors = [{ name = "AidinHamedi", email = "aidin.hamediasl@gmail.com" }]
-requires-python = ">=3.10"
+requires-python = ">=3.10, <4.0"
 keywords = [
     "pytorch",
     "deep-learning",
@@ -36,6 +36,11 @@ classifiers = ["Topic :: Software Development :: Libraries :: Python Modules"]
 pytest = "^8.3.5"
 isort = "^6.0.1"
 ruff = "^0.11.0"
+
+[tool.poetry.group.doc.dependencies]
+matplotlib = "^3.10.1"
+
+
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

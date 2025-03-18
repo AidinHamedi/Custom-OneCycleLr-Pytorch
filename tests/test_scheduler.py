@@ -78,4 +78,19 @@ def test_decay_phase(step, expected_lr):
 
 
 def test_scheduler_init():
-    pass
+    # Get a dummy optimizer 
+    optimizer = get_dummy_optimizer()
+    
+    # Init the scheduler
+    scheduler.OneCycleLr(
+        optimizer=optimizer,
+        warmup_iters=6,
+        lr_idling_iters=8,
+        annealing_iters=42,
+        decay_iters=90,
+        max_lr=0.01,
+        annealing_lr_min=0.001,
+        decay_lr_min=0.0001,
+        warmup_start_lr=0.0001,
+        warmup_type="exp",
+    )

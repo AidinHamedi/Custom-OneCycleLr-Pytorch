@@ -63,7 +63,7 @@ class OneCycleLr(LRScheduler):
             )
         
         # Init the super class
-        super().__init__(optimizer, last_epoch, verbose)
+        super().__init__(optimizer, last_epoch)
         
         # Init the attributes
         self.warmup_iters = warmup_iters
